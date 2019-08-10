@@ -53,54 +53,54 @@ module.exports = {
           })
       },
 
-    //   //Login
-    //   Login: (req, res) => {
-    //     const email = req.body.email
-    //     const password = req.body.password
+      //Login
+      Login: (req, res) => {
+        const email = req.body.email
+        const password = req.body.password
     
-    //     userModels.getByEmail(email)
-    //       .then((result) => {
-    //         const dataUser = result[0]
-    //         const usePassword = DrumHelper.setPassword(password, dataUser.salt).passwordHash
+        userModels.getByEmail(email)
+          .then((result) => {
+            const dataUser = result[0]
+            const usePassword = DrumHelper.setPassword(password, dataUser.salt).passwordHash
     
-    //         if (usePassword === dataUser.password) {
-    //           dataUser.token = jwt.sign({
-    //             userid: dataUser.userid
-    //           }, process.env.SECRET_KEY, { expiresIn: '12h' })
+            if (usePassword === dataUser.password) {
+              dataUser.token = jwt.sign({
+                userid: dataUser.userid
+              }, process.env.SECRET_KEY, { expiresIn: '12h' })
     
-    //           delete dataUser.salt
-    //           delete dataUser.password
-    //           userModels.updateToken(email, dataUser.token)
-    //                       .then((result) => {
+              delete dataUser.salt
+              delete dataUser.password
+              userModels.updateToken(email, dataUser.token)
+                          .then((result) => {
                             
-    //                       })
-    //                       .catch((err) => {
-    //                           console.log(err)
-    //                       })
+                          })
+                          .catch((err) => {
+                              console.log(err)
+                          })
     
-    //           return DrumHelper.response(res, dataUser, 200)
-    //         } else {
-    //           return DrumHelper.response(res, null, 403, 'Wrong password!')
-    //         }
+              return DrumHelper.response(res, dataUser, 200)
+            } else {
+              return DrumHelper.response(res, null, 403, 'Wrong password!')
+            }
     
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
+          })
+          .catch((error) => {
+            console.log(error)
+          })
     
-    //   },
+      },
 
-    //   //Logout
-    //   Logout:(req, res) => {
-    //     const userid = req.params.userid;
+      //Logout
+      Logout:(req, res) => {
+        const userid = req.params.userid;
     
-    //     userModels.Logout(userid)
-    //       .then((resultUser) => {
-    //         const result = resultUser[0]
-    //         DrumHelper.response(res, result, 200)
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
-    //   },
+        userModels.Logout(userid)
+          .then((resultUser) => {
+            const result = resultUser[0]
+            DrumHelper.response(res, result, 200)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      },
 }

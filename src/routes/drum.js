@@ -9,8 +9,8 @@ Route
   .get('/', DrumController.getIndex)
 //   .get('/user/', Auth.authInfo, Auth.accesstoken, UserController.AllUser)
 //   .get('/user/:userid', Auth.authInfo,  Auth.authInfo, Auth.accesstoken, UserController.IdUser)
-  .post('/register/', Auth.authInfo, UserController.Register)
-//   .post('/login/', Auth.authInfo, UserController.Login)
-//   .patch('/token/:userid', Auth.authInfo, UserController.Logout)
+  .post('/register/', UserController.Register)
+  .post('/login/', Auth.authInfo, UserController.Login)
+  .patch('/logout/:userid', UserController.Logout)
 
 module.exports = Route

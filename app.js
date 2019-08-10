@@ -1,17 +1,19 @@
-require('dotenv').config() // Initialize dotenv config
+require('dotenv').config()
 
-const express = require('express') // Import express
-const bodyParser = require('body-parser') // Import body-parses
-const app = express() // Create method
-const port = process.env.SERVER_PORT // Default PORT
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const port = process.env.SERVER_PORT
+const xssFilter = require('x-xss-protection')
+const logger = require('morgan')
+const userRoute = require('./src/routes/drum')
 
-const drumRoute = require('./src/routes/drum')
-
+app.use(express.static(__dirname + '/src/uploads/images/'))
+app.use(xssFilter())
+app.use(logger('dev'))
 app.listen(port, () => {
   console.log(`\n GASSSSSSS AKU DI PORT : ${port} MASS!!!!\n`)
-}) // Create listening app
-
-app.use(bodyParser.json()) // Body parse json
-app.use(bodyParser.urlencoded({ extended: false })) // body type
-
-app.use('/', drumRoute)
+}) 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/', userRoute)
