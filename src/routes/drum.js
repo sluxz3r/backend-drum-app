@@ -7,7 +7,7 @@ const Auth = require('../helpers/auth')
 
 Route
   .get('/', DrumController.getIndex)
-//   .get('/user/', Auth.authInfo, Auth.accesstoken, UserController.AllUser)
+  .get('/user/', Auth.authInfo, UserController.AllUser)
 //   .get('/user/:userid', Auth.authInfo,  Auth.authInfo, Auth.accesstoken, UserController.IdUser)
   .post('/register/', UserController.Register)
   .post('/login/', Auth.authInfo, UserController.Login)

@@ -2,6 +2,18 @@ const conn = require('../config/db')
 const jwt = require('jsonwebtoken')
 
 module.exports = {
+    //Get All User By Scored
+    AllUser: () => {
+        return new Promise((resolve, reject) => {
+          conn.query(`SELECT fullname, userid, scores FROM user ORDER BY scores DESC`, (err, result) => {
+            if (!err) {
+              resolve(result)
+            } else {
+              reject(new Error(err))
+            }
+          })
+        })
+      },
     //Register
     Register: (data) => {
         return new Promise((resolve, reject) => {
@@ -18,16 +30,16 @@ module.exports = {
     //Login
     getByEmail: (email) => {
         return new Promise((resolve, reject) => {
-          conn.query('SELECT userid, email, status, fullname, created_at, updated_at, salt, password FROM user WHERE email = ?', email, (err, result) => {
-            if (!err) {
-              resolve(result)
-            } else {
-              reject(new Error(err))
-            }
-          })
+            conn.query('SELECT userid, email, status, fullname, scores, created_at, updated_at, salt, password FROM user WHERE email = ?', email, (err, result) => {
+                if (!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
         })
-      },
-      updateToken: (email, token) => {
+    },
+    updateToken: (email, token) => {
         return new Promise((resolve, reject) => {
             conn.query(`UPDATE user SET token = ? WHERE email =?`, [token, email], (err, result) => {
                 if (!err) {
