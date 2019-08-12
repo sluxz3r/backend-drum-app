@@ -40,7 +40,6 @@ module.exports = {
       salt: passwordHash.salt,
       token: 'Test',
       status: 1,
-      scores: 0,
       created_at: new Date(),
       updated_at: new Date()
     }

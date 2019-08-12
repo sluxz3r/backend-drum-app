@@ -5,7 +5,7 @@ module.exports = {
     //Get All User By Scored
     AllUser: () => {
         return new Promise((resolve, reject) => {
-          conn.query(`SELECT fullname, userid, scores FROM user ORDER BY scores DESC`, (err, result) => {
+          conn.query(`SELECT user.fullname, user.userid, user.image, score.scores FROM user INNER JOIN score ON user.userid=score.id_score ORDER BY scores DESC`, (err, result) => {
             if (!err) {
               resolve(result)
             } else {
@@ -30,7 +30,7 @@ module.exports = {
     //Login
     getByEmail: (email) => {
         return new Promise((resolve, reject) => {
-            conn.query('SELECT userid, email, status, fullname, scores, created_at, updated_at, salt, password FROM user WHERE email = ?', email, (err, result) => {
+            conn.query('SELECT userid, email, status, fullname, created_at, updated_at, salt, password FROM user WHERE email = ?', email, (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {

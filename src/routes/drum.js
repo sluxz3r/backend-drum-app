@@ -6,9 +6,8 @@ const UserController = require('../controller/user')
 const Auth = require('../helpers/auth')
 
 Route
-  .get('/', DrumController.getIndex)
   .get('/user/', Auth.authInfo, UserController.AllUser)
-//   .get('/user/:userid', Auth.authInfo,  Auth.authInfo, Auth.accesstoken, UserController.IdUser)
+  .get('/drum/set/', Auth.authInfo, DrumController.DrumSet)
   .post('/register/', UserController.Register)
   .post('/login/', Auth.authInfo, UserController.Login)
   .patch('/logout/:userid', UserController.Logout)
