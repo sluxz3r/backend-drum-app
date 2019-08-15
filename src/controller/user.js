@@ -15,18 +15,30 @@ module.exports = {
       })
   },
 
-  // //Get User By ID
-  // IdUser: (req, res) => {
-  //     const userid = req.params.userid
-  //     userModels.IdUser(userid)
-  //         .then((resultUser) => {
-  //             const result = resultUser
-  //             DrumHelper.response(res, result, 200)
-  //         })
-  //         .catch((error) => {
-  //             console.log(error)
-  //         })
-  // },
+   //Get Pola
+   Pola: (req, res) => {
+    userModels.Pola()
+      .then((resultUser) => {
+        const result = resultUser
+        DrumHelper.response(res, result, 200)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+  //Get User By ID
+  UserId: (req, res) => {
+    const userid = req.params.userid
+    userModels.UserId(userid)
+      .then((resultUser) => {
+        const result = resultUser
+        DrumHelper.response(res, result, 200)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
 
   //Register
   Register: (req, res) => {
@@ -95,6 +107,36 @@ module.exports = {
     const userid = req.params.userid;
 
     userModels.Logout(userid)
+      .then((resultUser) => {
+        const result = resultUser[0]
+        DrumHelper.response(res, result, 200)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+  //Update Score
+  UpdateScore: (req, res) => {
+    const id_score = req.params.id_score;
+    const scores = req.body.scores
+
+    userModels.UpdateScore(id_score, scores)
+      .then((resultUser) => {
+        const result = resultUser[0]
+        DrumHelper.response(res, result, 200)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+
+   //Update Pola
+   UpdatePola: (req, res) => {
+    const id = req.params.id;
+    const pola = req.body.pola
+
+    userModels.UpdatePola(id, pola)
       .then((resultUser) => {
         const result = resultUser[0]
         DrumHelper.response(res, result, 200)
