@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = process.env.SERVER_PORT
+const port = process.env.PORT || 8000;
 
 const Cors = require('cors')
 const xssFilter = require('x-xss-protection')
@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/src/uploads/images/'))
 app.use(Cors())
 app.use(xssFilter())
 app.use(logger('dev'))
+
 app.listen(port, () => {
   console.log(`\n GASSSSSSS AKU DI PORT : ${port} MASS!!!!\n`)
 }) 
